@@ -195,7 +195,7 @@
 
     <!-- Simple Footer (Optional) -->
     <footer class="bg-gray-800 text-white p-4 text-center text-sm rounded-t-xl">
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <p>&copy; 2025 El Roman Caballero. All rights reserved.</p>
     </footer>
 
     <script>
