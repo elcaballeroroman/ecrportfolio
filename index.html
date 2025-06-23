@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Caballero Roman</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for full-page images and smooth scrolling */
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling between sections */
+        }
+        body {
+            font-family: 'Inter', sans-serif; /* Recommended font for modern look */
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light background */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        .full-page-section {
+            min-height: 100vh; /* Each section takes full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden; /* Ensure image doesn't overflow */
+        }
+        .full-page-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the entire section, cropping as needed */
+            object-position: center; /* Center the image within the section */
+            display: block;
+        }
+        /* Style for image overlay text, if you add any later */
+        .image-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .full-page-section:hover .image-overlay {
+            opacity: 1; /* Show on hover */
+        }
+        /* Loader styles */
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header / Navigation (Optional, but good for branding) -->
+    <header class="fixed top-0 left-0 w-full bg-white bg-opacity-90 shadow-md p-4 z-50 rounded-b-xl">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <a href="#" class="text-2xl font-bold text-gray-900 rounded-lg p-2 hover:bg-gray-100 transition-colors">Your Name / Studio</a>
+            <div class="flex space-x-4">
+                <!-- Social Media Links - Only Instagram is linked for now -->
+                <a href="https://instagram.com/elcaballeroroman" target="_blank" class="text-gray-600 hover:text-pink-500 transition-colors text-xl" aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.817 2H16.18C19.78 2 22 4.22 22 7.817V16.18C22 19.78 19.78 22 16.18 22H7.817C4.22 22 2 19.78 2 16.18V7.817C2 4.22 4.22 2 7.817 2zm.05 2.158c-.961 0-1.745.784-1.745 1.745s.784 1.745 1.745 1.745 1.745-.784 1.745-1.745-.784-1.745-1.745-1.745zm4.133 2.505c-3.155 0-5.71 2.555-5.71 5.71s2.555 5.71 5.71 5.71 5.71-2.555 5.71-5.71-2.555-5.71-5.71-5.71zm0 1.91c2.096 0 3.799 1.703 3.799 3.799s-1.703 3.799-3.799 3.799-3.799-1.703-3.799-3.799 1.703-3.799 3.799-3.799z"></path>
+                    </svg>
+                </a>
+                 <!-- Email icon added -->
+                <a href="mailto:elcaballeroroman@gmail.com" class="text-gray-600 hover:text-blue-600 transition-colors text-xl" aria-label="Email">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2.003 5.884L10 12.5l8-6.616A2.001 2.001 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884zM0 8v12a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V8l-9.987 8.322A2 2 0 0 1 12 16a2 2 0 0 1-2.013-1.678L0 8zm1 1.77L1 20h22V9.77l-11 9.17-11-9.17z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="portfolio-container" class="mt-16"> <!-- Adjusted margin-top for fixed header -->
+        <!-- Each full-page-section will contain one image -->
+        <!-- Images hosted on ImgBB with direct links are used. Ensure they are publicly accessible or "anyone with the link". -->
+        <!-- All images should be pre-optimized for web for fastest loading. -->
+        
+        <section id="photo1" class="full-page-section bg-gray-200">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/HDf3BJYw/IMG-6409.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 1" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <section id="photo2" class="full-page-section bg-gray-300">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/jZjXSRgQ/IMG-6404.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 2" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <section id="photo3" class="full-page-section bg-gray-400">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/prww9Zsr/IMG-6551.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 3" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <section id="photo4" class="full-page-section bg-gray-500">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/5xCRrLrB/IMG-6550.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 4" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <section id="photo5" class="full-page-section bg-gray-600">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/cXSzfwhZ/IMG-6521.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 5" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <section id="photo6" class="full-page-section bg-gray-700">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/x8sxJHPM/IMG-6548.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 6" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <section id="photo7" class="full-page-section bg-gray-800">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/kgqqsvTq/IMG-6447.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 7" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <section id="photo8" class="full-page-section bg-gray-900">
+            <div class="loader"></div>
+            <img 
+                data-src="https://i.ibb.co/vvzN6Jyw/IMG-6535.jpg"
+                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 8" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</span>
+        </section>
+
+        <!-- Add more <section> blocks as needed for your remaining photos -->
+        <!-- Remember to update the `id`, `data-src`, `alt`, and `image-overlay` for each new image. -->
+
+    </main>
+
+    <!-- Simple Footer (Optional) -->
+    <footer class="bg-gray-800 text-white p-4 text-center text-sm rounded-t-xl">
+        <p>&copy; 2025 El Roman Caballero. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for lazy loading images
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all image elements with data-src attribute
+            const lazyImages = document.querySelectorAll('img[data-src]');
+
+            // Options for the Intersection Observer
+            const imageObserverOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px', // No margin around the root
+                threshold: 0.1 // When 10% of the image is visible
+            };
+
+            // Callback function for the Intersection Observer
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        // Replace data-src with src to start loading
+                        img.src = img.dataset.src; 
+                        img.removeAttribute('data-src'); // Remove data-src to prevent re-loading
+
+                        // Stop observing once the image has started loading
+                        observer.unobserve(img); 
+                    }
+                });
+            }, imageObserverOptions);
+
+            // Observe each lazy image
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+
+            // Ensure the header doesn't cause layout shift on mobile/small screens
+            function adjustMainPadding() {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                document.getElementById('portfolio-container').style.marginTop = `${headerHeight}px`;
+            }
+
+            // Adjust padding on load and resize
+            adjustMainPadding();
+            window.addEventListener('resize', adjustMainPadding);
+        });
+    </script>
+</body>
+</html>
