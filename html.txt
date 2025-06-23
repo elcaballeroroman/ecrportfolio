@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portrait Photography Portfolio</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for full-page images and smooth scrolling */
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling between sections */
+        }
+        body {
+            font-family: 'Inter', sans-serif; /* Recommended font for modern look */
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light background */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        .full-page-section {
+            min-height: 100vh; /* Each section takes full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden; /* Ensure image doesn't overflow */
+        }
+        .full-page-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the entire section, cropping as needed */
+            object-position: center; /* Center the image within the section */
+            display: block;
+        }
+        /* Style for image overlay text, if you add any later */
+        .image-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .full-page-section:hover .image-overlay {
+            opacity: 1; /* Show on hover */
+        }
+        /* Loader styles */
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header / Navigation (Optional, but good for branding) -->
+    <header class="fixed top-0 left-0 w-full bg-white bg-opacity-90 shadow-md p-4 z-50 rounded-b-xl">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <a href="#" class="text-2xl font-bold text-gray-900 rounded-lg p-2 hover:bg-gray-100 transition-colors">Your Name / Studio</a>
+            <div class="flex space-x-4">
+                <!-- Social Media Links -->
+                <a href="https://instagram.com/your_instagram" target="_blank" class="text-gray-600 hover:text-pink-500 transition-colors text-xl" aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.817 2H16.18C19.78 2 22 4.22 22 7.817V16.18C22 19.78 19.78 22 16.18 22H7.817C4.22 22 2 19.78 2 16.18V7.817C2 4.22 4.22 2 7.817 2zm.05 2.158c-.961 0-1.745.784-1.745 1.745s.784 1.745 1.745 1.745 1.745-.784 1.745-1.745-.784-1.745-1.745-1.745zm4.133 2.505c-3.155 0-5.71 2.555-5.71 5.71s2.555 5.71 5.71 5.71 5.71-2.555 5.71-5.71-2.555-5.71-5.71-5.71zm0 1.91c2.096 0 3.799 1.703 3.799 3.799s-1.703 3.799-3.799 3.799-3.799-1.703-3.799-3.799 1.703-3.799 3.799-3.799z"></path>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/your_twitter" target="_blank" class="text-gray-600 hover:text-blue-400 transition-colors text-xl" aria-label="Twitter">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22.46 6c-.84.37-1.76.62-2.73.73.96-.58 1.7-1.5 2.04-2.57-.9.53-1.9.92-2.93 1.13C18.36 4.75 17.27 4 16.03 4c-2.47 0-4.48 2.01-4.48 4.48 0 .35.04.69.11 1.02-3.72-.18-7.02-1.97-9.23-4.68-.38.65-.59 1.4-.59 2.21 0 1.55.79 2.92 1.99 3.72-.73-.02-1.42-.22-2.02-.55v.05c0 2.17 1.55 3.98 3.59 4.39-.38.1-.78.15-1.19.15-.29 0-.58-.03-.86-.08.57 1.79 2.22 3.09 4.18 3.12-1.54 1.2-3.48 1.92-5.59 1.92-.36 0-.7-.02-1.04-.06 2 1.28 4.38 2.03 6.96 2.03 8.35 0 12.92-6.9 12.92-12.92 0-.2-.01-.4-.01-.6.89-.64 1.66-1.44 2.28-2.36z"></path>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/your_linkedin" target="_blank" class="text-gray-600 hover:text-blue-700 transition-colors text-xl" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="portfolio-container" class="mt-16"> <!-- Adjusted margin-top for fixed header -->
+        <!-- Each full-page-section will contain one image -->
+        <!-- IMPORTANT: Replace placeholder URLs with your actual optimized high-res image URLs -->
+        <!-- Ensure images are pre-optimized for web (e.g., 2000px on long edge, compressed JPGs) -->
+        
+        <section id="photo1" class="full-page-section bg-gray-200">
+            <div class="loader"></div>
+            <img 
+                data-src="https://placehold.co/1080x1920/f06d06/ffffff?text=Your+Work+1" 
+                alt="Portrait Photo 1" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Photo Title 1 - Description goes here</span>
+        </section>
+
+        <section id="photo2" class="full-page-section bg-gray-300">
+            <div class="loader"></div>
+            <img 
+                data-src="https://placehold.co/1080x1920/999999/ffffff?text=Your+Work+2" 
+                alt="Portrait Photo 2" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Photo Title 2 - Description goes here</span>
+        </section>
+
+        <section id="photo3" class="full-page-section bg-gray-400">
+            <div class="loader"></div>
+            <img 
+                data-src="https://placehold.co/1080x1920/666666/ffffff?text=Your+Work+3" 
+                alt="Portrait Photo 3" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Photo Title 3 - Description goes here</span>
+        </section>
+
+        <!-- Add more <section> blocks for your 15-30 photos -->
+        <!-- Example for a fourth photo: -->
+        <section id="photo4" class="full-page-section bg-gray-500">
+            <div class="loader"></div>
+            <img 
+                data-src="https://placehold.co/1080x1920/333333/ffffff?text=Your+Work+4" 
+                alt="Portrait Photo 4" 
+                class="full-page-image opacity-0 transition-opacity duration-500" 
+                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error'; this.style.opacity=1; this.previousElementSibling.style.display='none';"
+            >
+            <span class="image-overlay">Photo Title 4 - Description goes here</span>
+        </section>
+
+        <!-- Repeat the <section> block above for each of your 15-30 photos. -->
+        <!-- Make sure to change the `data-src` and `alt` attributes for each image. -->
+        <!-- You can also change the `id` and `bg-gray` classes for visual variety. -->
+
+    </main>
+
+    <!-- Simple Footer (Optional) -->
+    <footer class="bg-gray-800 text-white p-4 text-center text-sm rounded-t-xl">
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for lazy loading images
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all image elements with data-src attribute
+            const lazyImages = document.querySelectorAll('img[data-src]');
+
+            // Options for the Intersection Observer
+            const imageObserverOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px', // No margin around the root
+                threshold: 0.1 // When 10% of the image is visible
+            };
+
+            // Callback function for the Intersection Observer
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        // Replace data-src with src to start loading
+                        img.src = img.dataset.src; 
+                        img.removeAttribute('data-src'); // Remove data-src to prevent re-loading
+
+                        // Stop observing once the image has started loading
+                        observer.unobserve(img); 
+                    }
+                });
+            }, imageObserverOptions);
+
+            // Observe each lazy image
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+
+            // Ensure the header doesn't cause layout shift on mobile/small screens
+            function adjustMainPadding() {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                document.getElementById('portfolio-container').style.marginTop = `${headerHeight}px`;
+            }
+
+            // Adjust padding on load and resize
+            adjustMainPadding();
+            window.addEventListener('resize', adjustMainPadding);
+        });
+    </script>
+</body>
+</html>
