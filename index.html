@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Caballero Roman</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for overall layout, animations, and specific elements */
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling within sections */
+        }
+        body {
+            font-family: 'Inter', sans-serif; /* Recommended font for modern look */
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light background for the "frame" outside main content */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        /* Main content area with white background and padding for the "frame" effect */
+        .content-area {
+            background-color: white;
+            margin: 0 auto; /* Center the content area */
+            max-width: 1400px; /* Max width for desktop content */
+            min-height: 100vh; /* Ensures content area takes at least full viewport height */
+            box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 2rem; /* Padding at the bottom for footer spacing */
+
+            /* Responsive padding to create the white frame effect */
+            padding-left: 1rem;
+            padding-right: 1rem;
+            @media (min-width: 768px) { /* md breakpoint */
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+            @media (min-width: 1024px) { /* lg breakpoint */
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
+        }
+
+        /* Styling for the main header (desktop and mobile) */
+        .main-header {
+            text-align: center;
+            padding-top: 2rem; /* Space from the top edge of the white frame */
+            padding-bottom: 1rem;
+        }
+        .main-header .title {
+            font-size: 2.5rem; /* Larger font size for the main title */
+            font-weight: 900; /* Extra bold */
+            letter-spacing: -0.05em; /* Tighter letter spacing for bold look */
+            line-height: 1; /* Tighter line height */
+            color: #1a202c; /* Dark text */
+            transition: color 0.3s ease; /* Smooth color transition on hover */
+        }
+        .main-header .subtitle {
+            font-size: 1.25rem; /* Subtitle font size */
+            font-weight: 600; /* Semi-bold */
+            color: #4a5568; /* Slightly lighter text */
+            margin-top: 0.5rem;
+        }
+        .main-header .icon-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem; /* Space between icons */
+        }
+        .main-header .icon-links svg {
+            width: 1.75rem; /* Larger icons */
+            height: 1.75rem;
+            color: #4a5568; /* Default icon color */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+        .main-header .icon-links a:hover svg {
+            color: #e53e3e; /* Hover color for icons */
+        }
+
+        /* Menu button and dropdown styles */
+        .menu-button {
+            position: absolute; /* Position relative to header */
+            top: 1rem;
+            right: 1rem;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1a202c;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            z-index: 60; /* Above header */
+            @media (min-width: 768px) { /* Hide on medium screens and up */
+                display: none;
+            }
+        }
+        .menu-button:hover {
+            background-color: #f7fafc;
+        }
+
+        .dropdown-menu {
+            position: fixed; /* Fixed to viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 95%;
+            background-color: #ef4444; /* Red background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 55; /* Above content, below header */
+            transform: translateX(100%); /* Start off-screen to the right */
+            transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none; /* Disable interaction when hidden */
+        }
+        .dropdown-menu.active {
+            transform: translateX(0); /* Slide in */
+            opacity: 1;
+            pointer-events: all; /* Enable interaction when active */
+        }
+        .dropdown-menu a {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            padding: 0.75rem 0;
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+        .dropdown-menu a:hover {
+            color: #fcd34d; /* Yellowish hover color */
+            text-decoration: underline;
+        }
+        .dropdown-menu .close-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 65; /* Above dropdown content */
+        }
+
+        /* Desktop sidebar for categories */
+        .desktop-sidebar {
+            width: 250px; /* Fixed width for sidebar */
+            padding-right: 2rem;
+            flex-shrink: 0; /* Prevent shrinking */
+            display: none; /* Hidden by default */
+            @media (min-width: 768px) { /* Show on medium screens and up */
+                display: block;
+            }
+        }
+        .desktop-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 3rem; /* Space from header */
+        }
+        .desktop-sidebar li {
+            margin-bottom: 0.75rem;
+        }
+        .desktop-sidebar a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #4a5568;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        .desktop-sidebar a:hover, .desktop-sidebar a.active {
+            color: #e53e3e; /* Red hover/active color */
+            font-weight: bold;
+        }
+
+        /* Main content area for photos and pages */
+        .main-content-section {
+            flex-grow: 1; /* Takes remaining space */
+            padding-top: 1rem; /* Adjust for spacing below header/above content */
+        }
+
+        /* Gallery Grid Styles */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid columns */
+            gap: 1.5rem; /* Space between grid items */
+        }
+        .photo-item {
+            background-color: #f7fafc; /* Lighter background for photo items */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .photo-item img {
+            width: 100%;
+            height: 300px; /* Fixed height for consistency in grid, adjust as needed */
+            object-fit: cover;
+            display: block;
+        }
+        .photo-item .photo-title {
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2d3748;
+            text-align: center; /* Center the title below the photo */
+        }
+
+        /* Loader styles */
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #ef4444; /* Red loader */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Page content sections (hidden/shown by JS) */
+        .page-content {
+            display: none; /* Hidden by default */
+            padding: 2rem 0;
+        }
+        .page-content.active {
+            display: block; /* Shown when active */
+        }
+        .page-content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .page-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Specific styles for the Contact page */
+        #contact-page .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        #contact-page .contact-info a {
+            font-size: 1.2rem;
+            color: #2d3748;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        #contact-page .contact-info a:hover {
+            color: #ef4444;
+        }
+        #contact-page .contact-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%; /* Circular photo */
+            object-fit: cover;
+            margin-top: 1.5rem;
+            border: 4px solid #ef4444; /* Red border around contact photo */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="content-area">
+        <!-- Header -->
+        <header class="relative w-full main-header">
+            <!-- Menu button for mobile -->
+            <button id="menu-button" class="menu-button">Menu</button>
+
+            <!-- Site Title & Subtitle (Clickable to home) -->
+            <a href="#" id="home-link" class="block no-underline">
+                <div class="title">El Caballero Roman</div>
+                <div class="subtitle">Photography</div>
+            </a>
+            
+            <!-- Email and Instagram Icons -->
+            <div class="icon-links">
+                <a href="https://instagram.com/elcaballeroroman/" target="_blank" aria-label="Instagram">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.817 2H16.18C19.78 2 22 4.22 22 7.817V16.18C22 19.78 19.78 22 16.18 22H7.817C4.22 22 2 19.78 2 16.18V7.817C2 4.22 4.22 2 7.817 2zm.05 2.158c-.961 0-1.745.784-1.745 1.745s.784 1.745 1.745 1.745 1.745-.784 1.745-1.745-.784-1.745-1.745-1.745zm4.133 2.505c-3.155 0-5.71 2.555-5.71 5.71s2.555 5.71 5.71 5.71 5.71-2.555 5.71-5.71-2.555-5.71-5.71-5.71zm0 1.91c2.096 0 3.799 1.703 3.799 3.799s-1.703 3.799-3.799 3.799-3.799-1.703-3.799-3.799 1.703-3.799 3.799-3.799z"></path>
+                    </svg>
+                </a>
+                <a href="mailto:elcaballeroroman@gmail.com" aria-label="Email">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2.003 5.884L10 12.5l8-6.616A2.001 2.001 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884zM0 8v12a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V8l-9.987 8.322A2 2 0 0 1 12 16a2 2 0 0 1-2.013-1.678L0 8zm1 1.77L1 20h22V9.77l-11 9.17-11-9.17z"/>
+                    </svg>
+                </a>
+            </div>
+        </header>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="dropdown-menu" class="dropdown-menu">
+            <button id="close-menu-button" class="close-button">&times;</button>
+            <a href="#" data-page="home">Home</a>
+            <a href="#" data-page="street-style">Street Style</a>
+            <a href="#" data-page="behind-the-scenes">Behind the Scenes</a>
+            <a href="#" data-page="fashion-week">Fashion Week</a>
+            <a href="#" data-page="portraits">Portraits</a>
+            <a href="#" data-page="editorial">Editorial</a>
+            <a href="#" data-page="commercial">Commercial</a>
+            <a href="#" data-page="pets">Pets</a>
+            <a href="#" data-page="about">About</a>
+            <a href="#" data-page="contact">Contact</a>
+        </div>
+
+        <!-- Main Content Layout (Desktop: sidebar + content, Mobile: content only) -->
+        <div class="flex flex-grow-1 flex-col md:flex-row">
+            <!-- Desktop Sidebar Categories -->
+            <nav class="desktop-sidebar">
+                <ul>
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="street-style">Street Style</a></li>
+                    <li><a href="#" data-page="behind-the-scenes">Behind the Scenes</a></li>
+                    <li><a href="#" data-page="fashion-week">Fashion Week</a></li>
+                    <li><a href="#" data-page="portraits">Portraits</a></li>
+                    <li><a href="#" data-page="editorial">Editorial</a></li>
+                    <li><a href="#" data-page="commercial">Commercial</a></li>
+                    <li><a href="#" data-page="pets">Pets</a></li>
+                    <li><a href="#" data-page="about">About</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Main Content Area for Photos/Pages -->
+            <main id="dynamic-content" class="main-content-section flex-grow">
+                <!-- Home Page / Main Photo Gallery -->
+                <section id="home-page" class="page-content active">
+                    <div class="photo-grid">
+                        <!-- Photo Item 1 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/HDf3BJYw/IMG-6409.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 1" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+
+                        <!-- Photo Item 2 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/jZjXSRgQ/IMG-6404.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 2" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+
+                        <!-- Photo Item 3 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/prww9Zsr/IMG-6551.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 3" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+                        
+                        <!-- Photo Item 4 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/5xCRrLrB/IMG-6550.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 4" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+
+                        <!-- Photo Item 5 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/cXSzfwhZ/IMG-6521.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 5" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+
+                        <!-- Photo Item 6 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/x8sxJHPM/IMG-6548.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 6" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+
+                        <!-- Photo Item 7 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/kgqqsvTq/IMG-6447.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 7" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+
+                        <!-- Photo Item 8 -->
+                        <div class="photo-item">
+                            <div class="loader"></div>
+                            <img 
+                                data-src="https://i.ibb.co/vvzN6Jyw/IMG-6535.jpg"
+                                alt="Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 8" 
+                                onload="this.style.opacity=1; this.previousElementSibling.style.display='none';"
+                                onerror="this.src='https://placehold.co/1080x1920/cccccc/000000?text=Image+Load+Error';"
+                            >
+                            <div class="photo-title">Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean</div>
+                        </div>
+
+                        <!-- Add more photo items here following the same structure -->
+
+                    </div>
+                </section>
+
+                <!-- Category Pages (Initially hidden, shown by JS) -->
+                <section id="street-style-page" class="page-content">
+                    <h2></h2>
+                    <p>This section will feature a dynamic collection of street style photography, capturing candid moments and fashion trends in urban environments. Exploring the unique energy and diverse styles found on the streets. Coming Soon!</p>
+                    <!-- Add more street style content/photos here -->
+                </section>
+
+                <section id="behind-the-scenes-page" class="page-content">
+                    <h2></h2>
+                    <p>Take a peek behind the curtain! This section will offer an exclusive look at the making of photoshoots, fashion shows, concert events,and the like showcasing the equipment, team, and creative process involved in bringing our visions to life. Coming soon!</p>
+                    <!-- Add more BTS content/photos here -->
+                </section>
+
+                <section id="fashion-week-page" class="page-content">
+                    <h2></h2>
+                    <p>Experience the high-energy world of Fashion Week through our lens. From runway shows to backstage preparations, this collection captures the glamour, artistry, and excitement of the industry's most anticipated events. Coming soon!</p>
+                    <!-- Add more fashion week content/photos here -->
+                </section>
+
+                <section id="portraits-page" class="page-content">
+                    <h2></h2>
+                    <p>Delving deep into capturing the essence and personality of individuals. Each portrait aims to tell a unique story, highlighting the beauty and character of the subject. Coming Soon!</p>
+                    <!-- Add more portraits content/photos here -->
+                </section>
+
+                <section id="editorial-page" class="page-content">
+                    <h2></h2>
+                    <p>This section presents our editorial work, where photography meets storytelling. These images are crafted to accompany narratives, bringing concepts and themes to life with a strong visual voice. Coming Soon!</p>
+                    <!-- Add more editorial content/photos here -->
+                </section>
+
+                <section id="commercial-page" class="page-content">
+                    <h2></h2>
+                    <p>Explore our commercial photography, designed to elevate brands and products where we create compelling visuals that effectively communicate messages, enhance brand identity, and drive engagement for businesses. Coming Soon!</p>
+                    <!-- Add more commercial content/photos here -->
+                </section>
+
+                <section id="pets-page" class="page-content">
+                    <h2></h2>
+                    <p>A special collection dedicated to our beloved companions. These photos capture the joy, loyalty, and unique personalities of dogs, celebrating their place in our lives. Coming Soon!</p>
+                    <!-- Add more dogs content/photos here -->
+                </section>
+
+                <section id="about-page" class="page-content">
+                    <h2></h2>
+                    <p>Born in Torreon, Mexico, Roman Caballero began taking selfies with a flip phone back in 2007 after graduating from high school and has no plans of ever stopping. Briefly interrupted by life struggles, photography has motivated him to seek to travel across North America, Europe, Asia and beyond.  Although fashion is his specialty, he has also been accused of committing a variety of non-fashion related art. He is based in Coahuila and serving La Comarca area.</p>
+                    <!-- Add more about content here -->
+                </section>
+
+                <section id="contact-page" class="page-content">
+                    <h2></h2>
+                    <div class="contact-info">
+                        <img 
+                            src="https://ibb.co/Dfv0WZZd" 
+                            alt="Contact Photo" 
+                            class="contact-photo"
+                        >
+                        <p class="font-bold text-lg">Roman Caballero</p>
+                        <a href="mailto:elcaballeroroman@gmail.com" class="hover:underline">elcaballeroroman@gmail.com</a>
+                        <p></p>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-light grey text-black p-4 text-center text-sm">
+            <p>&copy; 2025 Roman Caballero. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuButton = document.getElementById('menu-button');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const closeMenuButton = document.getElementById('close-menu-button');
+            const allNavLinks = document.querySelectorAll('#dropdown-menu a, .desktop-sidebar a');
+            const homeLinkHeader = document.getElementById('home-link');
+            const dynamicContentArea = document.getElementById('dynamic-content');
+            const pageSections = document.querySelectorAll('.page-content');
+
+            // --- Menu Toggle (Mobile) ---
+            menuButton.addEventListener('click', () => {
+                dropdownMenu.classList.add('active');
+            });
+
+            closeMenuButton.addEventListener('click', () => {
+                dropdownMenu.classList.remove('active');
+            });
+
+            // --- Page Navigation (Client-Side Routing) ---
+            function showPage(pageId) {
+                // Hide all page sections
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Show the requested page
+                const targetPage = document.getElementById(`${pageId}-page`);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    // Scroll to the top of the main content area for new page
+                    dynamicContentArea.scrollTop = 0; 
+                }
+
+                // Update active state for desktop sidebar links
+                allNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.page === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Close mobile menu if open
+                dropdownMenu.classList.remove('active');
+            }
+
+            // Event listeners for all navigation links
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+                    const pageId = this.dataset.page;
+                    showPage(pageId);
+                });
+            });
+
+            // Home link in header
+            homeLinkHeader.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                showPage('home');
+            });
+
+            // --- Lazy Loading Images ---
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            const imageObserverOptions = {
+                root: null, /* Use the viewport as the root */
+                rootMargin: '0px', /* No margin around the root */
+                threshold: 0.1 /* When 10% of the image is visible */
+            };
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src; 
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img); 
+                    }
+                });
+            }, imageObserverOptions);
+
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+
+            // --- Adjust Main Padding for Fixed Header (if needed) ---
+            // This setup (relative header, content-area with margin auto) might not strictly need dynamic padding,
+            // but keeping a version of it for robustness if header design changes to fixed.
+            function adjustContentAreaTopMargin() {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                // Add padding-top to the main-content-section to avoid content being hidden under the fixed header
+                // The actual `main` element starts below the header, so this mostly ensures spacing within the content-area
+                document.querySelector('.main-content-section').style.paddingTop = `${headerHeight + 10}px`; // Add a little extra space
+            }
+
+            // Adjust on load and resize
+            adjustContentAreaTopMargin();
+            window.addEventListener('resize', adjustContentAreaTopMargin);
+
+            // Initial page load: show home page
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
