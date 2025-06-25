@@ -404,7 +404,7 @@
     <!-- Mobile Header -->
     <div class="mobile-header">
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">MENU</button>
-        <h1>EL CABALLERO ROMAN</h1>
+        <h1 onclick="window.open('https://elcaballeroroman.github.io/', '_blank')">EL CABALLERO ROMAN</h1>
         <p>PHOTOGRAPHY</p>
         <div class="mobile-social">
             <a href="mailto:elcaballeroroman@gmail.com">
@@ -424,7 +424,7 @@
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-close" onclick="toggleMobileMenu()">MENU</button>
         <div class="nav-section">
-            <a href="#" data-page="street-style" class="mobile-nav-link" onclick="toggleMobileMenu()">Street Style</a>
+            <a href="#" data-page="fashion-style" class="mobile-nav-link" onclick="toggleMobileMenu()">Fashion & Style</a>
             <a href="#" data-page="behind-scenes" class="mobile-nav-link" onclick="toggleMobileMenu()">Behind-The-Scenes</a>
             <a href="#" data-page="fashion-week" class="mobile-nav-link" onclick="toggleMobileMenu()">Fashion Week</a>
             <a href="#" data-page="portraits" class="mobile-nav-link" onclick="toggleMobileMenu()">Portraits</a>
@@ -440,8 +440,8 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Street Style Page (Default/Home) -->
-        <div class="page active" id="street-style">
+        <!-- Fashion & Style Page (Default/Home) -->
+        <div class="page active" id="fashion-style">
             <div class="photo-grid" id="photoGrid">
                 <!-- Photos will be loaded via JavaScript -->
             </div>
@@ -495,7 +495,68 @@
                 <p>Born in Torreon, Mexico, Roman Caballero began taking selfies when he bought his first flip phone back in 2007 after graduating from high school and has no plans of ever stopping. Briefly interrupted by life struggles, photography has motivated him to seek to travel across North America, Europe, Asia and beyond. Although fashion is his specialty, he has also been accused of committing a variety of non-fashion related art. He is based in Coahuila and currently serving La Comarca area.</p>
             </div>
         </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
 
+        .page {
+            min-height: 100vh;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .contact-info {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            text-align: left;
+        }
+
+        .contact-info h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info a {
+            font-size: 16px;
+            color: #666;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        .contact-info a:hover {
+            color: #333;
+        }
+
+        .contact-photo {
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        .contact-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
         <!-- Contact Page -->
         <div class="page" id="contact">
             <div class="contact-info">
