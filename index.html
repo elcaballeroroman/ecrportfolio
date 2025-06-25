@@ -361,7 +361,7 @@
         
         <nav class="nav-menu">
             <div class="nav-section">
-                <a href="#" data-page="street-style" class="nav-link active">Street Style</a>
+                <a href="#" data-page="fashion-style" class="nav-link active">Fashion & Style</a>
                 <a href="#" data-page="behind-scenes" class="nav-link">Behind-The-Scenes</a>
                 <a href="#" data-page="fashion-week" class="nav-link">Fashion Week</a>
                 <a href="#" data-page="portraits" class="nav-link">Portraits</a>
@@ -392,7 +392,7 @@
     <!-- Mobile Header -->
     <div class="mobile-header">
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">MENU</button>
-        <h1>EL CABALLERO ROMAN</h1>
+        <h1 onclick="randomizePhotos(); window.open('https://elcaballeroroman.github.io/', '_blank')">EL CABALLERO ROMAN</h1>
         <p>PHOTOGRAPHY</p>
         <div class="mobile-social">
             <a href="mailto:elcaballeroroman@gmail.com">
@@ -412,7 +412,7 @@
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-close" onclick="toggleMobileMenu()">MENU</button>
         <div class="nav-section">
-            <a href="#" data-page="street-style" class="mobile-nav-link" onclick="toggleMobileMenu()">Street Style</a>
+            <a href="#" data-page="fashion-style" class="mobile-nav-link" onclick="toggleMobileMenu()">Fashion & Style</a>
             <a href="#" data-page="behind-scenes" class="mobile-nav-link" onclick="toggleMobileMenu()">Behind-The-Scenes</a>
             <a href="#" data-page="fashion-week" class="mobile-nav-link" onclick="toggleMobileMenu()">Fashion Week</a>
             <a href="#" data-page="portraits" class="mobile-nav-link" onclick="toggleMobileMenu()">Portraits</a>
@@ -428,8 +428,8 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Street Style Page (Default/Home) -->
-        <div class="page active" id="street-style">
+        <!-- Fashion & Style Page (Default/Home) -->
+        <div class="page active" id="fashion-style">
             <div class="photo-grid" id="photoGrid">
                 <!-- Photos will be loaded via JavaScript -->
             </div>
@@ -509,37 +509,330 @@
         // Photo data for Street Style gallery
         const photos = [
             {
+                url: <a href="https://ibb.co/9kfwJ2Mm"><img src="https://i.ibb.co/bMyHxLfj/IMG-4510-edited.jpg" alt="IMG-4510-edited" border="0" /></a>,
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            
+            {
                 url: "https://i.ibb.co/HDf3BJYw/IMG-6409.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 1"
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
             },
             {
                 url: "https://i.ibb.co/jZjXSRgQ/IMG-6404.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 2"
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
             },
             {
                 url: "https://i.ibb.co/prww9Zsr/IMG-6551.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 3"
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
             },
             {
                 url: "https://i.ibb.co/5xCRrLrB/IMG-6550.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 4"
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
             },
             {
                 url: "https://i.ibb.co/cXSzfwhZ/IMG-6521.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 5"
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
             },
             {
                 url: "https://i.ibb.co/x8sxJHPM/IMG-6548.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 6"
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
             },
             {
                 url: "https://i.ibb.co/kgqqsvTq/IMG-6447.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 7"
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
             },
             {
                 url: "https://i.ibb.co/vvzN6Jyw/IMG-6535.jpg",
-                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 8"
-            }
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/zh3vfYhL"><img src="https://i.ibb.co/7J3my5JT/IMG-6350.jpg" alt="IMG-6350" border="0" /></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/MDqhwpmW"><img src="https://i.ibb.co/N6w3DpMQ/IMG-6364.jpg" alt="IMG-6364" border="0" /></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/VcN0QG1L"><img src="https://i.ibb.co/W43NPXhH/IMG-6366.jpg" alt="IMG-6366" border="0" /></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/fYRBfp1g"><img src="https://i.ibb.co/pvDGcz07/IMG-6367.jpg" alt="IMG-6367" border="0" /></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/p60zMn81"><img src="https://i.ibb.co/8nK5fXpm/IMG-6368.jpg" alt="IMG-6368" border="0" /></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/Rkbsh9XR"><img src="https://i.ibb.co/39djf7xg/IMG-6374.jpg" alt="IMG-6374" border="0" /></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            { 
+                url: <a href="https://ibb.co/ycfKfmyy"><img src="https://i.ibb.co/9k8B8mTT/IMG-6383.jpg" alt="IMG-6383" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 1"
+            },
+            {
+                url: <a href="https://ibb.co/DP0KzbXJ"><img src="https://i.ibb.co/sp83bPSf/IMG-6389.jpg" alt="IMG-6389" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/pjQF4mtt"><img src="https://i.ibb.co/QvkwY522/IMG-6403.jpg" alt="IMG-6403" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 1"
+            },
+            {
+                url: <a href="https://ibb.co/4ZStdMNN"><img src="https://i.ibb.co/pvKwyZXX/IMG-6404.jpg" alt="IMG-6404" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/v4YGpQ6J"><img src="https://i.ibb.co/JjQ4Vywz/IMG-6409.jpg" alt="IMG-6409" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/0jYYRvLY"><img src="https://i.ibb.co/xSzztdbz/IMG-6447.jpg" alt="IMG-6447" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/1JtHyMGP"><img src="https://i.ibb.co/NndwDr2J/IMG-6521.jpg" alt="IMG-6521" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/zVGqb8tD"><img src="https://i.ibb.co/XxScpyGM/IMG-6524.jpg" alt="IMG-6524" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/gFg0LDqj"><img src="https://i.ibb.co/JFkYwz6B/IMG-6535.jpg" alt="IMG-6535" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/yczzjmGg"><img src="https://i.ibb.co/G4ZZSfBC/IMG-6548.jpg" alt="IMG-6548" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/TqJg4t4m"><img src="https://i.ibb.co/qFhrNpNk/IMG-6550.jpg" alt="IMG-6550" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/whKp1gcg"><img src="https://i.ibb.co/4Rj4xt1t/IMG-6551.jpg" alt="IMG-6551" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/hJ3JtpgM"><img src="https://i.ibb.co/zTqT0Km5/IMG-6556.jpg" alt="IMG-6556" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/K4sx6Jt"><img src="https://i.ibb.co/Mw1knmz/IMG-6562.jpg" alt="IMG-6562" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/kgSNj3yB"><img src="https://i.ibb.co/Gv5zysJp/IMG-6569.jpg" alt="IMG-6569" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/sJH1kF94"><img src="https://i.ibb.co/NnSNQL2q/IMG-6574.jpg" alt="IMG-6574" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/ch2R8rnY"><img src="https://i.ibb.co/nMQ41LJP/IMG-6581.jpg" alt="IMG-6581" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/sdk9N5yf"><img src="https://i.ibb.co/NdQ2J1Zv/IMG-6644.jpg" alt="IMG-6644" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/DgMQQMhZ"><img src="https://i.ibb.co/S7mBBmbz/IMG-6652.jpg" alt="IMG-6652" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean"
+            },
+            {
+                url: <a href="https://ibb.co/vCy8QrWm"><img src="https://i.ibb.co/7xMFRTDV/IMG-7811-Enhanced.jpg" alt="IMG-7811-Enhanced" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/67P0GWYP"><img src="https://i.ibb.co/sdw9cVjw/IMG-7813-Enhanced.jpg" alt="IMG-7813-Enhanced" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/9kqchjvR"><img src="https://i.ibb.co/3904vHst/IMG-7816.jpg" alt="IMG-7816" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/mCGKq8MF"><img src="https://i.ibb.co/C5zy72Ts/IMG-7822.jpg" alt="IMG-7822" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/B5Qvf09P"><img src="https://i.ibb.co/MxtKgFmh/IMG-7827.jpg" alt="IMG-7827" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/DD9X2YKP"><img src="https://i.ibb.co/0jCNbKJp/IMG-7829.jpg" alt="IMG-7829" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/GfG5wyzt"><img src="https://i.ibb.co/DPmRXh08/IMG-7843.jpg" alt="IMG-7843" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/NnxYkyN0"><img src="https://i.ibb.co/G37P15MZ/IMG-7846.jpg" alt="IMG-7846" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/938W8yTb"><img src="https://i.ibb.co/0VDrDYMC/IMG-7860.jpg" alt="IMG-7860" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/HTqFvDcq"><img src="https://i.ibb.co/b5XWhg4X/IMG-7875.jpg" alt="IMG-7875" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/4nfhSBwt"><img src="https://i.ibb.co/hJM3dpx9/IMG-7879.jpg" alt="IMG-7879" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 1"
+            },
+            {
+                url: <a href="https://ibb.co/7N8XSNYv"><img src="https://i.ibb.co/Z1tVf1Ld/IMG-7885.jpg" alt="IMG-7885" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/Gyrc120"><img src="https://i.ibb.co/6zqgpPm/IMG-7907.jpg" alt="IMG-7907" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/60MJDBWV"><img src="https://i.ibb.co/zVMHPJ4j/IMG-7981.jpg" alt="IMG-7981" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/Fq5s6kWp"><img src="https://i.ibb.co/1JrsZYnc/IMG-7989.jpg" alt="IMG-7989" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/FLm14Xms"><img src="https://i.ibb.co/mVbK50bv/IMG-7997.jpg" alt="IMG-7997" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/QFP2t46X"><img src="https://i.ibb.co/qMNtVvRx/IMG-8000.jpg" alt="IMG-8000" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/5W37BfjT"><img src="https://i.ibb.co/Fb1PgjY6/IMG-8027.jpg" alt="IMG-8027" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/bgHJfK15"><img src="https://i.ibb.co/1fs6SmZG/IMG-8035.jpg" alt="IMG-8035" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/Ng9L8K76"><img src="https://i.ibb.co/wZSK94YN/IMG-8059.jpg" alt="IMG-8059" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/jv6NVxh7"><img src="https://i.ibb.co/LzkFQqS4/IMG-8063.jpg" alt="IMG-8063" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/PG4nKRJ6"><img src="https://i.ibb.co/0yZSTk1G/IMG-8068.jpg" alt="IMG-8068" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/XxLD0fPb"><img src="https://i.ibb.co/MkSfwyHs/IMG-8078.jpg" alt="IMG-8078" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/C3mQdc2d"><img src="https://i.ibb.co/rRFHPjsP/IMG-8090.jpg" alt="IMG-8090" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/3yVs9mDy"><img src="https://i.ibb.co/ccRvShGc/IMG-8171.jpg" alt="IMG-8171" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/XZqVN2Tt"><img src="https://i.ibb.co/TBsrpv5t/IMG-8179.jpg" alt="IMG-8179" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/KcxJH3kC"><img src="https://i.ibb.co/nqMFS5vh/IMG-8230.jpg" alt="IMG-8230" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/RkCKqvvc"><img src="https://i.ibb.co/XrzPq22t/IMG-8254.jpg" alt="IMG-8254" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/dJPrcjhF"><img src="https://i.ibb.co/6JHmZrdz/IMG-8266.jpg" alt="IMG-8266" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/tyJW728"><img src="https://i.ibb.co/NwyH8NZ/IMG-8280.jpg" alt="IMG-8280" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/bMfVTfPs"><img src="https://i.ibb.co/S4LgbLPt/IMG-8282.jpg" alt="IMG-8282" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/6cm9m5qx"><img src="https://i.ibb.co/Xfb0bTGg/IMG-8295.jpg" alt="IMG-8295" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/whz9Lyfj"><img src="https://i.ibb.co/d45dcBRx/IMG-8304.jpg" alt="IMG-8304" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/chWpQ1Lh"><img src="https://i.ibb.co/fd3KH2vd/IMG-8338.jpg" alt="IMG-8338" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/GfqXcMys"><img src="https://i.ibb.co/V0sd2CRH/IMG-8376.jpg" alt="IMG-8376" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/yctTS6tj"><img src="https://i.ibb.co/q3KG5NKQ/IMG-8445.jpg" alt="IMG-8445" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/ZznkbDDN"><img src="https://i.ibb.co/F4SjdTTn/IMG-8469.jpg" alt="IMG-8469" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/1GkL9Rq0"><img src="https://i.ibb.co/3mn70SNT/IMG-8508.jpg" alt="IMG-8508" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/1JzfCnDj"><img src="https://i.ibb.co/JF3RYdfg/IMG-8521.jpg" alt="IMG-8521" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/mVSRCR4f"><img src="https://i.ibb.co/Kpm5j5WT/IMG-8542.jpg" alt="IMG-8542" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/LmjhPfg"><img src="https://i.ibb.co/VRnpN8C/IMG-8566.jpg" alt="IMG-8566" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/W4pyxZm8"><img src="https://i.ibb.co/PvzhmKqX/IMG-8581.jpg" alt="IMG-8581" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/mrkJPPZS"><img src="https://i.ibb.co/V0RVkkn3/IMG-8597.jpg" alt="IMG-8597" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/ds3mpsv8"><img src="https://i.ibb.co/fVKDNVWj/IMG-8607.jpg" alt="IMG-8607" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/nq48RKnp"><img src="https://i.ibb.co/cKRXxsCq/IMG-8656.jpg" alt="IMG-8656" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
+            {
+                url: <a href="https://ibb.co/4gWp2D0q"><img src="https://i.ibb.co/Fq6zXfdr/IMG-8690.jpg" alt="IMG-8690" border="0"></a>
+                caption: "Gothic Macabre 10.30.24 @sanfranciscofashionweek | Petra Mediterranean Image 1"
+            },
+            {
+                url: <a href="https://ibb.co/VpJ71tmc"><img src="https://i.ibb.co/mFbLjG8V/IMG-8692.jpg" alt="IMG-8692" border="0"></a>
+                caption: "San Francisco Fashion Week : Winter WöNDƎRLaND (12/15/24) | LVL55SF X Temple_SF"
+            },
         ];
 
         // Fisher-Yates shuffle algorithm to randomize array
@@ -593,8 +886,8 @@
 
         // Randomize photos function
         function randomizePhotos() {
-            // Only randomize if we're on the Street Style page (which has photos)
-            if (document.getElementById('street-style').classList.contains('active')) {
+            // Only randomize if we're on the Fashion Style page (which has photos)
+            if (document.getElementById('fashion-style').classList.contains('active')) {
                 loadPhotos();
             }
         }
