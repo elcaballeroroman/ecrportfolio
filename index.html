@@ -184,6 +184,48 @@
             color: red;
         }
         
+        /* Navigation arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 30px;
+            padding: 15px 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        .nav-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .nav-arrow.prev {
+            left: 20px;
+        }
+        
+        .nav-arrow.next {
+            right: 20px;
+        }
+        
+        /* Photo counter */
+        .photo-counter {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 15px;
+            z-index: 10;
+        }
+        
         /* Content Pages */
         .page-content {
             max-width: 800px;
@@ -338,8 +380,22 @@
             .photo-grid {
                 grid-template-columns: repeat(auto-fill, minmax(clamp(80px, 25vw, 150px), 1fr));
                 gap: clamp(1px, 0.3vw, 3px);
+           }
+            
+            .nav-arrow {
+                display: none;
             }
-        }
+            
+            .modal-content {
+                padding: 10px;
+            }
+            
+            .photo-counter {
+                top: 10px;
+                font-size: 12px;
+                padding: 3px 10px;
+            }
+        } 
         
         /* Hide content initially */
         .page {
@@ -348,6 +404,19 @@
         
         .page.active {
             display: block;
+        }
+
+        /* Swipe animation */
+        .modal-content img {
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-content img.swipe-left {
+            transform: translateX(-100%);
+        }
+        
+        .modal-content img.swipe-right {
+            transform: translateX(100%);
         }
     </style>
 </head>
